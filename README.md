@@ -48,7 +48,7 @@ For many simple, single file projects, you may find it inconvenient to write a c
 
 ### Create a alias
 
-    alias hhvm="docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp diegomarangoni/hhvm hhvm"
+    alias hhvm="docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp diegomarangoni/hhvm:cli hhvm"
 
 ### Then test it
 
