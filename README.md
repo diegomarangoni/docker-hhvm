@@ -1,6 +1,6 @@
 # Supported tags and respective `Dockerfile` links
 
--   [`hhvm`, `cli`, `latest` (*latest/Dockerfile*)](https://github.com/diegomarangoni/docker-hhvm/blob/release/cli/Dockerfile)
+-   [`latest`, `cli` (*latest/Dockerfile*)](https://github.com/diegomarangoni/docker-hhvm/blob/release/cli/Dockerfile)
 -   [`fastcgi` (*latest/fastcgi/Dockerfile*)](https://github.com/diegomarangoni/docker-hhvm/blob/release/fastcgi/Dockerfile)
 
 # What is HHVM?
