@@ -13,4 +13,74 @@ HHVM is an open-source virtual machine designed for executing programs written i
 
 # How to use this image.
 
-Work in progress...
+## With `docker run`
+
+For Hack/PHP projects run through the command line interface (CLI), you can do the following.
+
+### Create a `Dockerfile` in your Hack/PHP project
+
+    FROM diegomarangoni/hhvm:cli
+    COPY . /usr/src/myapp
+    WORKDIR /usr/src/myapp
+    CMD [ "hhvm", "./your-script.php" ]
+
+Then, run the commands to build and run the Docker image:
+
+    docker build -t my-app .
+    docker run -it --rm --name my-running-app my-app
+
+I recommend that you add a custom `php.ini` configuration. `COPY` it into `/etc/hhvm/php.ini` by adding one more line to the Dockerfile above and running the same commands to build and run:
+
+    FROM diegomarangoni/hhvm:cli
+    COPY config/php.ini /etc/hhvm/php.ini
+
+You can get a copy of `php.ini` file at image repository:
+
+[php.ini](https://github.com/diegomarangoni/docker-hhvm/blob/release/cli/php.ini)
+
+### Run a single Hack/PHP script
+
+For many simple, single file projects, you may find it inconvenient to write a complete `Dockerfile`. In such cases, you can run a Hack/PHP script by using the image directly:
+
+    docker run -it --rm --name my-running-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp diegomarangoni/hhvm:cli hhvm your-script.php
+
+## With alias
+
+### Create a alias
+
+    alias hhvm="docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp diegomarangoni/hhvm hhvm"
+
+### Then test it
+
+    hhvm --version
+
+### And finally...
+
+    hhvm your-script.php
+
+And you can also add a custom `php.ini` file, just by mounting it as a volume:
+
+    docker run -it --rm --name my-running-script -v /path/to/php.ini:/etc/hhvm/php.ini -v "$PWD":/usr/src/myapp -w /usr/src/myapp diegomarangoni/hhvm:cli hhvm your-script.php
+
+And the alias should look like:
+
+    alias hhvm="docker run --rm -v /path/to/php.ini:/etc/hhvm/php.ini -v "$PWD":/usr/src/myapp -w /usr/src/myapp diegomarangoni/hhvm:cli hhvm"
+
+## With a web server
+
+You can run a fastcgi server that will work within a web server like nginx or apache:
+
+    docker run -it diegomarangoni/hhvm:fastcgi
+
+By default, the image expose the port 9000, you can replace that with a `environment` variable:
+
+    docker run -it \
+        -e HHVM_FASTCGI_PORT=8080 \
+        --expose 8080 \
+        diegomarangoni/hhvm:fastcgi
+
+And if you want to add a custom `php.ini` file:
+
+    docker run -it \
+        -v /path/to/php.ini:/etc/hhvm/php.ini \
+        diegomarangoni/hhvm:fastcgi
