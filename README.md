@@ -34,9 +34,7 @@ I recommend that you add a custom `php.ini` configuration. `COPY` it into `/etc/
     FROM diegomarangoni/hhvm:cli
     COPY config/php.ini /etc/hhvm/php.ini
 
-You can get a copy of `php.ini` file at image repository:
-
-[php.ini](https://github.com/diegomarangoni/docker-hhvm/blob/release/cli/php.ini)
+You can grab a fresh copy of `php.ini` from inside the image.
 
 ### Run a single Hack/PHP script
 
@@ -72,12 +70,7 @@ You can run a fastcgi server that will work within a web server like nginx or ap
 
     docker run -it diegomarangoni/hhvm:fastcgi
 
-By default, the image expose the port 9000, you can replace that with a `environment` variable:
-
-    docker run -it \
-        -e HHVM_FASTCGI_PORT=8080 \
-        --expose 8080 \
-        diegomarangoni/hhvm:fastcgi
+By default, the image expose the port 9000, you can change that by editing `/etc/hhvm/server.ini`.
 
 And if you want to add a custom `php.ini` file:
 
