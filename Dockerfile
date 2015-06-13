@@ -1,4 +1,4 @@
-FROM diegomarangoni/hhvm
+FROM diegomarangoni/hhvm:src
 
 MAINTAINER "Diego Marangoni" <diegomarangoni@me.com>
 
