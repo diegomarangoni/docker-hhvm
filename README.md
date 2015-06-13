@@ -2,6 +2,8 @@
 
 -   [`latest`, `cli` (*latest/Dockerfile*)](https://github.com/diegomarangoni/docker-hhvm/blob/release/cli/Dockerfile)
 -   [`fastcgi` (*latest/fastcgi/Dockerfile*)](https://github.com/diegomarangoni/docker-hhvm/blob/release/fastcgi/Dockerfile)
+-   [`src`, `src-cli` (*src/Dockerfile*)](https://github.com/diegomarangoni/docker-hhvm/blob/release/src-cli/Dockerfile)
+-   [`src-fastcgi` (*src/fastcgi/Dockerfile*)](https://github.com/diegomarangoni/docker-hhvm/blob/release/src-fastcgi/Dockerfile)
 
 # What is HHVM?
 
