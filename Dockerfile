@@ -29,10 +29,11 @@ RUN cd /tmp \
     && git submodule update --init --recursive \
     && cmake . \
     && make \
-    && make install
+    && make install \
+    && rm -rf /tmp/hhvm
 
 COPY php.ini /etc/hhvm/
 
-RUN mkdir /var/lib/php5
+RUN mkdir /var/lib/php5 /var/log/hhvm /var/run/hhvm
 
 CMD ["hhvm", "--config=/etc/hhvm/php.ini", "-a"]
