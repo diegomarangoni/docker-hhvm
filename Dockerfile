@@ -23,10 +23,16 @@ RUN apt-get update && \
         automake libldap2-dev libkrb5-dev libyaml-dev gperf ocaml-native-compilers && \
     rm -rf /var/lib/apt/lists/*
 
-RUN mkdir /tmp/hhvm && cd $_ \
-    && git clone git://github.com/facebook/hhvm.git . --depth=1 \
+RUN cd /tmp \
+    && git clone git://github.com/facebook/hhvm.git --depth=1 \
+    && cd hhvm \
     && git submodule update --init --recursive \
     && cmake . \
-    && make
+    && make \
+    && make install
 
-CMD ["hhvm", "-a"]
+COPY php.ini /etc/hhvm/
+
+RUN mkdir /var/lib/php5
+
+CMD ["hhvm", "--config=/etc/hhvm/php.ini", "-a"]
