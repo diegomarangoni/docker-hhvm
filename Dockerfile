@@ -2,7 +2,8 @@ FROM debian:jessie
 
 MAINTAINER "Diego Marangoni" <diegomarangoni@me.com>
 
-RUN apt-get update && \
+RUN apt-get clean && \
+    apt-get update && \
     apt-get install -y git-core cmake gawk libmysqlclient-dev \
         libxml2-dev libmcrypt-dev libicu-dev openssl build-essential binutils-dev \
         libcap-dev zlib1g-dev libtbb-dev libonig-dev libpcre3-dev \
