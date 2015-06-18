@@ -31,7 +31,7 @@ RUN git clone git://github.com/facebook/hhvm.git --depth=1
 WORKDIR /tmp/hhvm
 RUN git submodule update --init --recursive
 
-RUN cmake
+RUN cmake .
 RUN make
 RUN make install
 
