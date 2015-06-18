@@ -25,8 +25,12 @@ RUN apt-get install -y g++ cpp gcc make libboost-thread1.55.0 \
         libmagickwand-dev libiberty-dev libevent-dev libxslt-dev libgoogle-glog-dev \
         automake libldap2-dev libkrb5-dev libyaml-dev gperf ocaml-native-compilers
 
-RUN cd /tmp && git clone git://github.com/facebook/hhvm.git --depth=1
-RUN cd hhvm && git submodule update --init --recursive
+WORKDIR /tmp
+RUN git clone git://github.com/facebook/hhvm.git --depth=1
+
+WORKDIR /tmp/hhvm
+RUN git submodule update --init --recursive
+
 RUN cmake
 RUN make
 RUN make install
@@ -34,6 +38,8 @@ RUN make install
 COPY php.ini /etc/hhvm/
 
 RUN mkdir /var/lib/php5 /var/log/hhvm /var/run/hhvm
+
+WORKDIR /
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 CMD ["hhvm", "--config=/etc/hhvm/php.ini", "-a"]
