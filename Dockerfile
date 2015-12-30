@@ -1,4 +1,4 @@
-FROM diegomarangoni/hhvm
+FROM diegomarangoni/hhvm:fastcgi
 
 MAINTAINER "Diego Marangoni" <diegomarangoni@me.com>
 
